@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
@@ -14,15 +14,15 @@ class RegistrationController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required'],
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(['messages' => $validator->errors()]);
         }
 
         User::create($validator->validated());
 
-        return response()->noContent();
+        return response()->json(['messages' => __('auth.registration')]);
     }
 }

@@ -16,7 +16,7 @@ class APIBasic
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->bearerToken() === env('APP_TOKEN')) {
+        if ($request->bearerToken() === config('api.token')) {
             return $next($request);
         }
 

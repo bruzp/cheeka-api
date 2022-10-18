@@ -13,12 +13,12 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(['messages' => $validator->errors()]);
         }
 
         if (Auth::attempt($validator->validated())) {
@@ -29,6 +29,13 @@ class LoginController extends Controller
             return response()->json(['token' => $token->plainTextToken]);
         }
 
-        return response()->json(null, 422);
+        return response()->json(['messages' => ['email' => __('auth.failed')]], 422);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['messages' => __('auth.logout')]);
     }
 }

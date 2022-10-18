@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\RegistrationController;
+use App\Http\Controllers\API\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::prefix('v1')->group(function(){
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::get('/user', [UserController::class, 'getUser']);
+
+        Route::post('/logout', [LoginController::class, 'logout']);
+    });
+
+    Route::middleware('api.basic')
+    ->group(function(){
+        Route::post('/register', [RegistrationController::class, 'store']);
+
+        Route::post('/login', [LoginController::class, 'authenticate']);
+    });
 });
-
-Route::middleware('api.basic')
-->prefix('v1')
-->group(function(){
-    Route::post('/register', [RegistrationController::class, 'store']);
-
-    Route::post('/login', [LoginController::class, 'authenticate']);
-});
-
