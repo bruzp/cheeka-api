@@ -9,7 +9,7 @@ use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
-    public function getUser(Request $request)
+    public function show(Request $request)
     {
         return response()->json(new UserResource($request->user()));
     }
