@@ -1,14 +1,14 @@
-**API**
+### API
 
-[Goal]
+### Goal
 Develop chat application using Inertia.
 
-[Tools]
-> Laravel
-> Inertia
-> Vue3
-> Sanctum
-> Custom API Authorization
+### Built With
 
-[Progress]
+* [Laravel](https://laravel.com/)
+* [Sanctum](https://laravel.com/docs/9.x/sanctum#main-content)
+* [Inertia](https://inertiajs.com/)
+* [Vue](https://vuejs.org/)
+
+### Progress
 > Done creating authentication and profile edit.
