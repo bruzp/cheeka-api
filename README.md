@@ -1,6 +1,7 @@
 ### API
 
-### Goal
+<!-- ABOUT THE PROJECT -->
+## About The Project
 Develop chat application using Inertia.
 
 ### Built With
